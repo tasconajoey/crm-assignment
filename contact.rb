@@ -12,7 +12,7 @@ class Contact
     @note = note
 
     @id = @@id
-    @@id += 1 
+    @@id += 1
   end
 
   # This method should call the initializer,
@@ -25,21 +25,38 @@ class Contact
 
   # This method should return all of the existing contacts
   def self.all
-
+    @@contacts
   end
 
   # This method should accept an id as an argument
   # and return the contact who has that id
-  def self.find
+  def self.find(id)
+    found_contact = nil
 
+    @@contacts.each do |contact|
+      if contact.id == id
+        found_contact = contact
+      end
+    end
+    found_contact
   end
 
   # This method should allow you to specify
   # 1. which of the contact's attributes you want to update
   # 2. the new value for that attribute
   # and then make the appropriate change to the contact
-  def update
-
+  def update(attribute, value)
+    if "first_name" == attribute
+      @first_name = value
+    elsif "last_name" == attribute
+      @last_name = value
+    elsif "email" == attribute
+      @email = value
+    elsif "note" == attribute
+      @note = value
+    else
+      puts "You didn't ask for a change try again\n"
+    end
   end
 
   # This method should work similarly to the find method above
@@ -56,7 +73,9 @@ class Contact
   end
 
   def full_name
-
+    @@contacts.each do |name|
+      name.first_name
+    end
   end
 
   # This method should delete the contact
