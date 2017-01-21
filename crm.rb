@@ -63,16 +63,30 @@ class CRM
   end
 
   def delete_contact
-
+    print 'Enter the ID of the contact to delete: '
+    id = gets.chomp.to_i
+    c = Contact.find(id)
+    c.delete
   end
 
   def display_all_contacts
-
+    contacts = Contact.all
+    contacts.each do |value|
+      puts "\ Id: #{value.id} \n First Name: #{value.first_name} \n Last Name \n #{value.last_name} \n Email: #{value.email} \n Note: #{value.note}"
+    end
   end
 
   def search_by_attribute
-
+    puts "What type of attribute do you want? The options are first name, last name, email, and note. To access the options write \"first_name\", \"last_name\", \"email\", or \"note\"."
+    attribute = gets.chomp
+    puts "Put in the value that you are looking for associated with your contact."
+    value = gets.chomp
+    result = Contact.find_by(attribute, value)
+    puts result
   end
 
 
 end
+
+c = CRM.new("c")
+c.main_menu
